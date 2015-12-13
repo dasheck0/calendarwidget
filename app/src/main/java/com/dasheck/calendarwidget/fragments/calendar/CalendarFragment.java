@@ -1,6 +1,7 @@
 package com.dasheck.calendarwidget.fragments.calendar;
 
 import android.os.Bundle;
+import android.support.v4.util.Pair;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
@@ -13,8 +14,9 @@ import com.dasheck.calendarwidget.adapters.DateAdapter;
 import com.dasheck.calendarwidget.annotations.Layout;
 import com.dasheck.calendarwidget.fragments.BaseFragment;
 import com.dasheck.calendarwidget.fragments.create_event.CreateEventFragment;
-import com.dasheck.calendarwidget.fragments.create_event.CreateEventView;
+import com.dasheck.calendarwidget.models.HeroItem;
 import com.dasheck.data.models.Date;
+import java.util.Arrays;
 import java.util.List;
 
 /**
@@ -29,6 +31,7 @@ public class CalendarFragment extends BaseFragment implements CalendarView,
 
   @Bind(R.id.calendarList) RecyclerView calendarList;
   @Bind(R.id.dateTextView) TextView dateTextView;
+  @Bind(R.id.textView7) TextView textView7;
 
   public static CalendarFragment newInstance() {
     return new CalendarFragment();
@@ -72,13 +75,13 @@ public class CalendarFragment extends BaseFragment implements CalendarView,
     dateAdapter.clearSelection();
   }
 
-  @Override public void loadEventScreenForDate(long timestamp) {
+  @Override public void loadEventScreenForDate(HeroItem heroItem, long timestamp) {
     CreateEventFragment fragment = CreateEventFragment.newInstance(timestamp);
-    ((MainActivity) getActivity()).transist(fragment);
+    ((MainActivity) getActivity()).transist(fragment, Arrays.asList(heroItem));
   }
 
-  @Override public void onDateClick(int position) {
+  @Override public void onDateClick(HeroItem heroItem, int position) {
     Date date = dateAdapter.get(position);
-    presenter.chooseDate(date);
+    presenter.chooseDate(heroItem, date);
   }
 }

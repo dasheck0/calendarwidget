@@ -1,6 +1,7 @@
 package com.dasheck.calendarwidget.fragments.calendar;
 
 import com.dasheck.calendarwidget.fragments.Presenter;
+import com.dasheck.calendarwidget.models.HeroItem;
 import com.dasheck.data.models.Date;
 
 /**
@@ -14,5 +15,5 @@ public interface CalendarPresenter extends Presenter {
 
   void loadNextMonth();
 
-  void chooseDate(Date date);
+  void chooseDate(HeroItem heroItem, Date date);
 }

@@ -5,6 +5,7 @@ import android.util.Pair;
 import com.dasheck.calendarwidget.fragments.BasePresenterImpl;
 import com.dasheck.calendarwidget.fragments.calendar.interactors.GetDatesForMonthAndYearInteractor;
 import com.dasheck.calendarwidget.fragments.calendar.interactors.GetDatesForMonthAndYearInteractorImpl;
+import com.dasheck.calendarwidget.models.HeroItem;
 import com.dasheck.data.models.Date;
 import com.dasheck.data.utilities.DateUtilities;
 import java.util.Calendar;
@@ -50,9 +51,9 @@ public class CalendarPresenterImpl extends BasePresenterImpl implements Calendar
     loadCurrentCalendar();
   }
 
-  @Override public void chooseDate(Date date) {
+  @Override public void chooseDate(HeroItem heroItem, Date date) {
     Log.d("TAG", "Date has event " + (date.getEvent() != null));
-    view.loadEventScreenForDate(date.getTimestamp());
+    view.loadEventScreenForDate(heroItem, date.getTimestamp());
   }
 
   private void loadCurrentCalendar() {

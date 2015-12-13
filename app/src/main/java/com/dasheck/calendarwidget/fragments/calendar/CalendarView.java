@@ -1,6 +1,7 @@
 package com.dasheck.calendarwidget.fragments.calendar;
 
 import com.dasheck.calendarwidget.fragments.BaseView;
+import com.dasheck.calendarwidget.models.HeroItem;
 import com.dasheck.data.models.Date;
 import java.util.List;
 
@@ -17,5 +18,5 @@ public interface CalendarView extends BaseView {
 
   void clearSelection();
 
-  void loadEventScreenForDate(long timestamp);
+  void loadEventScreenForDate(HeroItem heroItem, long timestamp);
 }

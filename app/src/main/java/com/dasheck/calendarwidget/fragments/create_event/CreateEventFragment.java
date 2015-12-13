@@ -3,11 +3,16 @@ package com.dasheck.calendarwidget.fragments.create_event;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 import butterknife.Bind;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 import com.dasheck.calendarwidget.R;
 import com.dasheck.calendarwidget.annotations.Layout;
 import com.dasheck.calendarwidget.fragments.BaseFragment;
+import com.nineoldandroids.animation.Animator;
 
 /**
  * Created by dasheck on 12/13/15.
@@ -34,5 +39,42 @@ public class CreateEventFragment extends BaseFragment implements CreateEventView
     super.onViewCreated(view, savedInstanceState);
     presenter = new CreateEventPresenterImpl(this);
     presenter.initializeViews();
+    presenter.setTimestamp(getArguments().getLong(BUNDLE_TIMESTAMP_KEY));
+
+    eventContainer.getViewTreeObserver()
+        .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+          @Override
+          public void onGlobalLayout() {
+            showEventContainer();
+          }
+        });
+  }
+
+  @Override public void setDayNumber(int dayOfMonth) {
+    dayTextView.setText(String.valueOf(dayOfMonth));
+  }
+
+  @Override public void showEventContainer() {
+    YoYo.with(Techniques.SlideInRight)
+        .duration(getResources().getInteger(R.integer.animation_duration))
+        .withListener(new Animator.AnimatorListener() {
+          @Override public void onAnimationStart(Animator animation) {
+            animation.setInterpolator(new OvershootInterpolator());
+            eventContainer.setVisibility(View.VISIBLE);
+          }
+
+          @Override public void onAnimationEnd(Animator animation) {
+
+          }
+
+          @Override public void onAnimationCancel(Animator animation) {
+
+          }
+
+          @Override public void onAnimationRepeat(Animator animation) {
+
+          }
+        })
+        .playOn(eventContainer);
   }
 }

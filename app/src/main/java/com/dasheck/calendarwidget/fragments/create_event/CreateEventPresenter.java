@@ -6,4 +6,6 @@ import com.dasheck.calendarwidget.fragments.Presenter;
  * Created by dasheck on 12/13/15.
  */
 public interface CreateEventPresenter extends Presenter {
+
+  void setTimestamp(long timestamp);
 }

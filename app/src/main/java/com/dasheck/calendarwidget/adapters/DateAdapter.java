@@ -12,6 +12,8 @@ import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import com.dasheck.calendarwidget.R;
+import com.dasheck.calendarwidget.models.HeroItem;
+import com.dasheck.calendarwidget.utilities.Constants;
 import com.dasheck.data.models.Date;
 import com.dasheck.data.utilities.DateUtilities;
 import java.util.ArrayList;
@@ -79,18 +81,21 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
           String.valueOf(DateUtilities.getDayOfMonth(item.getTimestamp())));
       holder.dayNumberTextView.setOnClickListener(v -> {
         if (onDateClickListener != null) {
-          if(selected != -1) {
+          if (selected != -1) {
             notifyItemChanged(selected);
           }
           selected = position;
           notifyItemChanged(selected);
-          onDateClickListener.onDateClick(position);
+          onDateClickListener.onDateClick(
+              new HeroItem(holder.dayNumberTextView, Constants.TRANSITION_HERO_NAME_CALENDAR),
+              position);
         }
       });
 
-      applyStyle(holder.dayNumberTextView, item.getEvent() == null ? STYLE_NORMAL : STYLE_HAS_EVENT);
+      applyStyle(holder.dayNumberTextView,
+          item.getEvent() == null ? STYLE_NORMAL : STYLE_HAS_EVENT);
 
-      if(selected == position) {
+      if (selected == position) {
         applyStyle(holder.dayNumberTextView, STYLE_SELECTED);
       }
     } else {
@@ -113,7 +118,7 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
   }
 
   public interface OnDateClickListener {
-    void onDateClick(int position);
+    void onDateClick(HeroItem heroItem, int position);
   }
 
   private void applyStyle(TextView textView, String style) {

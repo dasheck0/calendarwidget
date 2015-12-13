@@ -5,45 +5,58 @@
     android:background="@color/colorAccent">
 
     <RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:background="@color/colorPrimary" android:layout_marginLeft="32dp"
-        android:layout_marginRight="32dp" android:layout_marginTop="32dp"
-        android:id="@+id/eventContainer" android:layout_above="@+id/dateContainer">
+        android:layout_width="336dp"
+        android:layout_height="384dp"
+        android:visibility="invisible"
+        android:id="@+id/eventContainer" android:layout_centerInParent="true">
         <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" android:background="@color/white"
-            android:layout_marginTop="8dp">
-            <EditText
+            android:layout_height="match_parent"
+            android:background="@color/colorPrimary" android:id="@+id/topContainer"
+            android:layout_above="@+id/relativeLayout"
+            android:elevation="6dp"
+            >
+            <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="64dp"
-                android:id="@+id/editText" android:layout_alignParentTop="true"
-                android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
-                android:hint="Name"
-                android:layout_toLeftOf="@+id/imageView" android:layout_toStartOf="@+id/imageView"
-                android:background="@color/white" android:paddingLeft="16dp"/>
-            <ImageView
-                android:layout_width="64dp"
-                android:layout_height="64dp"
-                android:id="@+id/imageView" android:layout_alignParentTop="true"
-                android:layout_alignParentRight="true" android:src="@mipmap/ic_launcher"
-                android:padding="8dp"/>
+                android:layout_height="wrap_content" android:background="@color/white"
+                android:layout_marginTop="8dp">
+                <EditText
+                    android:layout_width="match_parent"
+                    android:layout_height="64dp"
+                    android:id="@+id/editText" android:layout_alignParentTop="true"
+                    android:layout_alignParentLeft="true" android:layout_alignParentStart="true"
+                    android:hint="Name"
+                    android:layout_toLeftOf="@+id/imageView" android:layout_toStartOf="@+id/imageView"
+                    android:background="@color/white" android:paddingLeft="16dp"/>
+                <ImageView
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:id="@+id/imageView" android:layout_alignParentTop="true"
+                    android:layout_alignParentRight="true" android:src="@mipmap/ic_launcher"
+                    android:padding="8dp"/>
+            </RelativeLayout>
         </RelativeLayout>
+        <com.dasheck.calendarwidget.views.TriangleView android:layout_width="64dp"
+            android:layout_height="32dp"
+            app:fillColor="@color/colorPrimary"
+            android:layout_centerHorizontal="true" android:layout_alignParentBottom="true"
+            android:id="@+id/relativeLayout" android:layout_alignParentTop="false"
+            />
     </RelativeLayout>
-    <com.dasheck.calendarwidget.views.TriangleView android:layout_width="64dp"
-        android:layout_height="32dp" android:layout_below="@+id/eventContainer"
-        app:fillColor="@color/colorPrimary"
-        android:layout_centerHorizontal="true"/>
 
     <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="64dp" android:layout_alignParentBottom="true"
-        android:layout_margin="32dp" android:id="@+id/dateContainer">
+        android:layout_height="64dp" android:layout_alignParentBottom="false"
+        android:id="@+id/dateContainer"
+        android:layout_below="@+id/eventContainer">
         <TextView
-            android:layout_width="64dp"
-            android:layout_height="64dp"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
             android:text="1"
+            android:transitionName="heroTransitionDate"
             android:id="@+id/dayTextView" android:gravity="center"
-            style="@style/TextAppearance.AppCompat.Title" android:layout_centerInParent="true"/>
+            style="@style/TextAppearance.AppCompat.Title" android:layout_centerInParent="true"
+            android:textColor="@color/white"
+            android:background="@drawable/date_item_seleted_inverted"/>
     </RelativeLayout>
 </RelativeLayout>
