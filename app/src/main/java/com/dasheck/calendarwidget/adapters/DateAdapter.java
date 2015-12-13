@@ -53,6 +53,14 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
     notifyDataSetChanged();
   }
 
+  public Date get(int position) {
+    return items.get(position);
+  }
+
+  public void clearSelection() {
+    selected = -1;
+  }
+
   public void setOnDateClickListener(
       OnDateClickListener onDateClickListener) {
     this.onDateClickListener = onDateClickListener;
@@ -64,7 +72,7 @@ public class DateAdapter extends RecyclerView.Adapter<DateAdapter.ViewHolder> {
   }
 
   @Override public void onBindViewHolder(ViewHolder holder, int position) {
-    Date item = items.get(position);
+    Date item = get(position);
 
     if (item.isActive()) {
       holder.dayNumberTextView.setText(

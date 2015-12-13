@@ -16,6 +16,7 @@ import com.dasheck.data.models.Date;
 import com.dasheck.data.models.Event;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -28,8 +29,15 @@ public class MainActivity extends AppCompatActivity {
     loadInitialFragment();
   }
 
-  void loadInitialFragment() {
+  private void loadInitialFragment() {
     CalendarFragment fragment = CalendarFragment.newInstance();
+    getSupportFragmentManager().beginTransaction()
+        .replace(R.id.fragmentContainer, fragment)
+        .addToBackStack(((Object) fragment).getClass().getName())
+        .commit();
+  }
+
+  public void transist(Fragment fragment) {
     getSupportFragmentManager().beginTransaction()
         .replace(R.id.fragmentContainer, fragment)
         .addToBackStack(((Object) fragment).getClass().getName())

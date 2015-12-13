@@ -14,4 +14,8 @@ public interface CalendarView extends BaseView {
   void updateCalendar(List<Date> dates);
 
   void setMonthAndYear(String caption);
+
+  void clearSelection();
+
+  void loadEventScreenForDate(long timestamp);
 }

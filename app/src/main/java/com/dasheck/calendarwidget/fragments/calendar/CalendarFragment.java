@@ -8,9 +8,12 @@ import android.widget.TextView;
 import butterknife.Bind;
 import butterknife.OnClick;
 import com.dasheck.calendarwidget.R;
+import com.dasheck.calendarwidget.activities.MainActivity;
 import com.dasheck.calendarwidget.adapters.DateAdapter;
 import com.dasheck.calendarwidget.annotations.Layout;
 import com.dasheck.calendarwidget.fragments.BaseFragment;
+import com.dasheck.calendarwidget.fragments.create_event.CreateEventFragment;
+import com.dasheck.calendarwidget.fragments.create_event.CreateEventView;
 import com.dasheck.data.models.Date;
 import java.util.List;
 
@@ -18,7 +21,8 @@ import java.util.List;
  * Created by dasheck on 12/13/15.
  */
 @Layout(R.layout.fragment_calendar)
-public class CalendarFragment extends BaseFragment implements CalendarView {
+public class CalendarFragment extends BaseFragment implements CalendarView,
+    DateAdapter.OnDateClickListener {
 
   private CalendarPresenter presenter;
   private DateAdapter dateAdapter;
@@ -48,6 +52,7 @@ public class CalendarFragment extends BaseFragment implements CalendarView {
 
   @Override public void bindAdapter() {
     dateAdapter = new DateAdapter(getContext());
+    dateAdapter.setOnDateClickListener(this);
 
     calendarList.setHasFixedSize(true);
     calendarList.setLayoutManager(new GridLayoutManager(getContext(), 7));
@@ -56,11 +61,24 @@ public class CalendarFragment extends BaseFragment implements CalendarView {
 
   @Override public void updateCalendar(List<Date> dates) {
     dateAdapter.clear();
-
     dateAdapter.addAll(dates);
   }
 
   @Override public void setMonthAndYear(String caption) {
     dateTextView.setText(caption);
+  }
+
+  @Override public void clearSelection() {
+    dateAdapter.clearSelection();
+  }
+
+  @Override public void loadEventScreenForDate(long timestamp) {
+    CreateEventFragment fragment = CreateEventFragment.newInstance(timestamp);
+    ((MainActivity) getActivity()).transist(fragment);
+  }
+
+  @Override public void onDateClick(int position) {
+    Date date = dateAdapter.get(position);
+    presenter.chooseDate(date);
   }
 }
