@@ -4,10 +4,9 @@ apply plugin: 'me.tatarka.retrolambda'
 android {
   compileSdkVersion 23
   buildToolsVersion "23.0.2"
-
   defaultConfig {
     applicationId "com.dasheck.calendarwidget"
-    minSdkVersion 15
+    minSdkVersion 16
     targetSdkVersion 23
     versionCode 1
     versionName "1.0"
@@ -18,17 +17,21 @@ android {
       proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
     }
   }
-
   compileOptions {
     sourceCompatibility JavaVersion.VERSION_1_8
     targetCompatibility JavaVersion.VERSION_1_8
+  }
+  productFlavors {
   }
 }
 
 dependencies {
   compile fileTree(include: ['*.jar'], dir: 'libs')
   compile project(':data')
-
   compile 'com.android.support:appcompat-v7:23.1.1'
+  compile 'com.android.support:cardview-v7:23.1.1'
+  compile 'com.android.support:recyclerview-v7:23.1.1'
+  compile 'com.jakewharton:butterknife:7.0.1'
   compile 'io.reactivex:rxjava:1.1.0'
+  compile 'com.github.bignerdranch:expandable-recycler-view:v2.0.4'
 }

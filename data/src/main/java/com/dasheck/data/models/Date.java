@@ -8,17 +8,16 @@ import java.util.List;
 public class Date {
 
   private long timestamp;
-  private Location location;
-  private List<Attendee> attendees;
+  private boolean active;
+  private Event event;
 
   public Date() {
   }
 
-  public Date(long timestamp, Location location,
-      List<Attendee> attendees) {
+  public Date(long timestamp, boolean active, Event event) {
     this.timestamp = timestamp;
-    this.location = location;
-    this.attendees = attendees;
+    this.active = active;
+    this.event = event;
   }
 
   public long getTimestamp() {
@@ -29,19 +28,19 @@ public class Date {
     this.timestamp = timestamp;
   }
 
-  public Location getLocation() {
-    return location;
+  public boolean isActive() {
+    return active;
   }
 
-  public void setLocation(Location location) {
-    this.location = location;
+  public void setActive(boolean active) {
+    this.active = active;
   }
 
-  public List<Attendee> getAttendees() {
-    return attendees;
+  public Event getEvent() {
+    return event;
   }
 
-  public void setAttendees(List<Attendee> attendees) {
-    this.attendees = attendees;
+  public void setEvent(Event event) {
+    this.event = event;
   }
 }
