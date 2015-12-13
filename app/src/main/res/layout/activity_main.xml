@@ -4,11 +4,5 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity">
-
-    <android.support.v7.widget.RecyclerView
-        android:layout_width="336dp"
-        android:layout_height="288dp"
-        android:id="@+id/calendarList" android:background="@color/colorPrimary"/>
-
-</RelativeLayout>
+    android:id="@+id/fragmentContainer"
+    tools:context=".MainActivity" android:background="@color/colorAccent" />
