@@ -52,8 +52,11 @@ public class CalendarPresenterImpl extends BasePresenterImpl implements Calendar
   }
 
   @Override public void chooseDate(HeroItem heroItem, Date date) {
-    Log.d("TAG", "Date has event " + (date.getEvent() != null));
-    view.loadEventScreenForDate(heroItem, date.getTimestamp());
+    if(date.getEvent() == null) {
+      view.loadEventCreationScreenForDate(heroItem, date.getTimestamp());
+    } else {
+      view.loadEventScreenForDate(heroItem, date.getTimestamp());
+    }
   }
 
   private void loadCurrentCalendar() {

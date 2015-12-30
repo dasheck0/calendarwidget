@@ -3,7 +3,6 @@ package com.dasheck.calendarwidget.fragments.create_event;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.ViewTreeObserver;
 import android.view.animation.OvershootInterpolator;
 import android.widget.TextView;
 import butterknife.Bind;
@@ -23,6 +22,7 @@ public class CreateEventFragment extends BaseFragment implements CreateEventView
   public static final String BUNDLE_TIMESTAMP_KEY = "bundleTimestampKey";
 
   private CreateEventPresenter presenter;
+  private boolean containerShown = false;
 
   @Bind(R.id.eventContainer) ViewGroup eventContainer;
   @Bind(R.id.dayTextView) TextView dayTextView;
@@ -42,10 +42,10 @@ public class CreateEventFragment extends BaseFragment implements CreateEventView
     presenter.setTimestamp(getArguments().getLong(BUNDLE_TIMESTAMP_KEY));
 
     eventContainer.getViewTreeObserver()
-        .addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-          @Override
-          public void onGlobalLayout() {
+        .addOnGlobalLayoutListener(() -> {
+          if (!containerShown) {
             showEventContainer();
+            containerShown = true;
           }
         });
   }

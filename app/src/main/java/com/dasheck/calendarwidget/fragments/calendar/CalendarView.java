@@ -19,4 +19,6 @@ public interface CalendarView extends BaseView {
   void clearSelection();
 
   void loadEventScreenForDate(HeroItem heroItem, long timestamp);
+
+  void loadEventCreationScreenForDate(HeroItem heroItem, long timestamp);
 }

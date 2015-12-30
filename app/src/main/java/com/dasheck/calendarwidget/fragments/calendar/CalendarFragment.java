@@ -14,9 +14,11 @@ import com.dasheck.calendarwidget.adapters.DateAdapter;
 import com.dasheck.calendarwidget.annotations.Layout;
 import com.dasheck.calendarwidget.fragments.BaseFragment;
 import com.dasheck.calendarwidget.fragments.create_event.CreateEventFragment;
+import com.dasheck.calendarwidget.fragments.event.ShowEventFragment;
 import com.dasheck.calendarwidget.models.HeroItem;
 import com.dasheck.data.models.Date;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -46,11 +48,11 @@ public class CalendarFragment extends BaseFragment implements CalendarView,
   }
 
   @OnClick(R.id.previousMonthButton) public void onPreviousMonthButtonClicked(View view) {
-      presenter.loadPreviousMonth();
+    presenter.loadPreviousMonth();
   }
 
   @OnClick(R.id.nextMonthButton) public void onNextMonthButtonClicked(View view) {
-      presenter.loadNextMonth();
+    presenter.loadNextMonth();
   }
 
   @Override public void bindAdapter() {
@@ -76,8 +78,13 @@ public class CalendarFragment extends BaseFragment implements CalendarView,
   }
 
   @Override public void loadEventScreenForDate(HeroItem heroItem, long timestamp) {
+    ShowEventFragment fragment = ShowEventFragment.newInstance(timestamp);
+    ((MainActivity) getActivity()).transist(fragment, Collections.singletonList(heroItem));
+  }
+
+  @Override public void loadEventCreationScreenForDate(HeroItem heroItem, long timestamp) {
     CreateEventFragment fragment = CreateEventFragment.newInstance(timestamp);
-    ((MainActivity) getActivity()).transist(fragment, Arrays.asList(heroItem));
+    ((MainActivity) getActivity()).transist(fragment, Collections.singletonList(heroItem));
   }
 
   @Override public void onDateClick(HeroItem heroItem, int position) {
